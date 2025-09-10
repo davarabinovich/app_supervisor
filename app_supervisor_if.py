@@ -117,6 +117,8 @@ class AppSupervisorIf(ABC):
     def receive_load(self):
         self._ask_save_to_file_and_enter_to_synced()
         file_path: str = self._ask_file_to_load_via_dialog()
+        if file_path == '':
+            return
         file_content = self._load_cb(file_path)
         if not isinstance(file_content, self._content_type):
             raise BadContentType
